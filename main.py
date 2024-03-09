@@ -20,11 +20,9 @@ def procesar_imagenes():
             imagen_bytes = blob.read()
             respuestas.append(contar_personas(imagen_bytes))
 
-        # print(imagenes_bytes)
-        # respuestas = [contar_personas(imagen_bytes) for imagen_bytes in imagenes_bytes.values()]
-        # promedio_respuestas = sum(respuestas) / 3.0
-
-        return jsonify({'promedio_respuestas': 100}), 200
+        print(respuestas)
+        promedio_respuestas = sum(respuestas) / 3.0
+        return jsonify({'promedio_respuestas': promedio_respuestas}), 200
     except Exception as e:
         print(e)
         return jsonify({"error": str(e)}), 500
