@@ -1,8 +1,10 @@
 import boto3
 
+region = "us-east-1"
+
 
 def contar_personas(imagen_binaria, perfil_aws='RekognitionFullAccess_user'):
-    rekognition_client = boto3.Session(profile_name=perfil_aws).client('rekognition')
+    rekognition_client = boto3.Session(profile_name=perfil_aws, region_name=region).client('rekognition')
 
     try:
         response = rekognition_client.detect_faces(
@@ -16,7 +18,6 @@ def contar_personas(imagen_binaria, perfil_aws='RekognitionFullAccess_user'):
     except Exception as e:
         return f"Error al analizar la imagen: {e}"
 
-
-#ruta_imagen = 'p1.jpg'
-#cantidad_personas = contar_personas(ruta_imagen)
+# ruta_imagen = 'p1.jpg'
+# cantidad_personas = contar_personas(ruta_imagen)
 # print(cantidad_personas)

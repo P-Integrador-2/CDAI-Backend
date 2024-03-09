@@ -5,11 +5,13 @@ from flask_cors import CORS
 from person_reko import contar_personas
 from PIL import Image
 import io
+
 app = Flask(__name__)
 CORS(app)
 
+
 # Endpoint para recibir las tres imágenes y devolver el promedio de las respuestas
-@app.route('/',methods=['POST', "post", 'OPTIONS'])
+@app.route('/', methods=['POST', "post", 'OPTIONS'])
 def procesar_imagenes():
     try:
         respuestas = []
@@ -18,16 +20,14 @@ def procesar_imagenes():
             imagen_bytes = blob.read()
             respuestas.append(contar_personas(imagen_bytes))
 
-
-
-        #print(imagenes_bytes)
-        #respuestas = [contar_personas(imagen_bytes) for imagen_bytes in imagenes_bytes.values()]
-        #promedio_respuestas = sum(respuestas) / 3.0
+        # print(imagenes_bytes)
+        # respuestas = [contar_personas(imagen_bytes) for imagen_bytes in imagenes_bytes.values()]
+        # promedio_respuestas = sum(respuestas) / 3.0
 
         return jsonify({'promedio_respuestas': 100}), 200
     except Exception as e:
         print(e)
-        return jsonify({"error":str(e)}), 500
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == '__main__':
